@@ -1,0 +1,27 @@
+"a) З таблиці «Клієнти» вивести інформацію про клієнта: у якого країна Франція або місто Лондон, 
+при цьому міста починаються на «L». Результат повинен містити наступні поля: «ID клієнта», 
+«Ім’я клієнта», «Країна», «Місто», «Адреса» та бути відсортований за іменем клієнта 
+від Я до А."	"SELECT CustomerID AS 'Customer_ID', 
+       CustomerName AS 'Customer_Name', 
+       Country AS 'Country', 
+       City AS 'City', 
+       Address AS 'Address'
+FROM Customers
+WHERE Country = 'France' 
+   OR City = 'London' OR City LIKE 'L%'
+ORDER BY CustomerName DESC;
+"
+"b) З таблиць «Працівники» та «Замовлення» вивести наступну інформацію про замовлення: 
+порахувати кількість замовлень, які належать працівникам та вивести лише тих в яких 
+кількість замовлень від 10 до 30. Результат повинен містити наступні поля: «Прізвище 
+працівника», «Кількість замовлень»."	"SELECT 
+    Employees.LastName AS 'Employee_Last_Name',
+    COUNT(Orders.OrderID) AS 'Order_Count'
+FROM 
+    Employees
+INNER JOIN 
+    Orders ON Employees.EmployeeID = Orders.EmployeeID
+GROUP BY 
+    Employees.LastName
+HAVING 
+    COUNT(Orders.OrderID) BETWEEN 10 AND 30;"
